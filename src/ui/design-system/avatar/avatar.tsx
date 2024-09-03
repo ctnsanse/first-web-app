@@ -30,9 +30,9 @@ export const Avatar = ({ size = "medium", src, alt }: Props) => {
     <div className = {clsx(sizeStyles, "bg-gray-400 rounded relative")}>
         <Image 
         fill
-            src = {src}
+            src = {src ? src: "/assets/svg/avatar-default.svg"}
             alt = {alt}
-            className = "object-cover object-center rounded"
+            className = "object-cover object-center rounded-full"
         />
     </div>
     );
