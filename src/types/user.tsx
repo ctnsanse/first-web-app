@@ -15,5 +15,6 @@ export interface UserDocument {
     email: string
     how_did_hear: string
     creation_date: Timestamp
+    onBoardingIsCompleted: boolean
     // ..
 }

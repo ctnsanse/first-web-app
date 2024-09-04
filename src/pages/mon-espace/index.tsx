@@ -5,7 +5,7 @@ import { GUEST, REGISTERED } from "@/lib/session-status";
 
 
 
-export default function Connexion() {
+export default function UserAccount() {
   return (
     <>
     <Seo title = "Mon espace" 
