@@ -18,7 +18,7 @@ export const OnboardingFooter = ({
 }: Props) => {
     let actionButtonTitle: string
 
-    if (isFirstStep && !isFirstStep()) {
+    if (isFirstStep && isFirstStep()) {
         actionButtonTitle = "Démarrer"
     } else if (isFinalStep && isFinalStep()) {
         actionButtonTitle ="Terminer"

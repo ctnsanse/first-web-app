@@ -19,6 +19,11 @@ export const OnboardingContainer = () => {
             id: 2,
             label: "Profile",
             component: { step: ProfileStep } 
+        },
+        { 
+            id: 3,
+            label: "Avatar",
+            component: { step: ProfileStep } 
         }
     ]
 
