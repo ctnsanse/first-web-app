@@ -28,15 +28,16 @@ export const firestoreCreateDocument = async (collectionName: string, documentID
 }
 
 // Modification/MAJ d'un utilisateur dans la db
-export const firestoreUpdateDocument = async (collectionName: string, documentID: string, data: object) => {
+export const firestoreUpdateDocument = async (
+    collectionName: string, 
+    documentID: string, 
+    data: object
+) => {
     try {
 
         const documentRef = doc(db, collectionName, documentID)
 
-        await updateDoc(
-            documentRef,
-            {data}
-        )
+        await updateDoc(documentRef, data)
         return { data: true}
     } catch(error) {
 

@@ -4,30 +4,30 @@ import { Typography } from "../typography/typography";
 interface Props {
     isLoading: boolean;
     placeholder: string;
-    type?: "text" | "email" | "password";
+    rows?: number
     register: any;
     errors: any;
     errorMsg?: string;
     id: string;
     required?: boolean;
-    isLAutoCompleted?: boolean;
+    isAutoCompleted?: boolean;
     label?: string;
 }
 
-export const Input = ({
+export const Textarea = ({
     isLoading,
     placeholder,
-    type = "text",
+    rows = 5,
     register,
     errors,
     errorMsg = "Tu dois renseigner ce champ",
     id,
     required = true,
-    isLAutoCompleted = false,
+    isAutoCompleted = false,
     label,
 }: Props) => {
     return (
-    <div className="space-y-2">
+        <div className="space-y-2">
         {label && (
             <Typography
             variant="caption4"
@@ -37,20 +37,24 @@ export const Input = ({
                 {label}
             </Typography>
         )}
-            <input 
-            type={type} 
-            placeholder={placeholder} 
+        <textarea 
+            rows={rows}
+            placeholder={placeholder}
             className={clsx(
-                isLoading && "cursor-not-allowed",
+                isLoading ? "bg-gray-300 focus:ring-gray-300 cursor-not-allowed" : "bg-white",
                 errors[id] ? "placeholder-alert-danger text-alert-danger" : "placeholder-gray-600",
-                "w-full p-4 font-light border border-gray-600 rounded focus:outline-none focus:ring-1 focus:ring-primary placeholder-gray-600"
+                "w-full p-4 font-light border rounded focus:outline-none focus:ring-1 focus:ring-primary border-gray-600"
             )}
             disabled={isLoading}
-            {...register(id,
-                {required: {value: required, message: errorMsg}})}
-            autoComplete={isLAutoCompleted ? "on" : "off"} 
-            />
-            {errors[id] && (
+            {...register(id, {
+                required: {
+                    value: required,
+                    message: errorMsg,
+                }
+            })}
+            autoComplete={isAutoCompleted ? "on" : "off"}
+        />
+        {errors[id] && (
                 <Typography variant="caption4" component="div" theme="danger">
                 {errors[id]?.message}
                 </Typography>

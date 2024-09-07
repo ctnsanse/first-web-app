@@ -23,8 +23,8 @@ export const OnboardingContainer = () => {
         { 
             id: 3,
             label: "Avatar",
-            component: { step: ProfileStep } 
-        }
+            component: { step: WelcomeStep } 
+        },
     ]
 
     // Revoyer l'infomation en fonction de l'état actuel

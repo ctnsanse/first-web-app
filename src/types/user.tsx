@@ -16,5 +16,8 @@ export interface UserDocument {
     how_did_hear: string
     creation_date: Timestamp
     onBoardingIsCompleted: boolean
+    displayName: string
+    expertise: string
+    biography: string
     // ..
 }
