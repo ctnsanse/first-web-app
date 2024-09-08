@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ForgetPasswordView } from "./forget-password.view";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ForgetPasswordFormFielsType } from "@/types/form";
-import { sendEmailToResetPassword } from "@/api/authentification";
+import { sendEmailToResetPassword } from "@/api/authentication";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 

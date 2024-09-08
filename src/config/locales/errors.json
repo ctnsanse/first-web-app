@@ -1,0 +1,14 @@
+{
+    "an_unknown_error_has_occurred": "Une erreur inconnue est survenue veuillez réssayer, contactez-nous si le problème persiste.",
+
+    "firestore": {
+        "permission-denied": "Permission manquantes ou insuffisantes."
+    },
+
+    "signInWithEmailAndPassword": {
+        "auth/invalid-email": "Cette adresse e-mail ne semble pas valide.",
+        "auth/user-disabled": "Connexion impossible, votre compte à été désactivé.",
+        "auth/user-not-found": "Connexion impossible, cette adresse e-email n'éxiste pas.",
+        "auth/wrong-password": "Connexion impossible, votre mot de passe et votre e-mail ne corresspondent pas."
+    }
+}

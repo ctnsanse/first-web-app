@@ -1,7 +1,7 @@
 import { Box } from "@/ui/design-system/box/box"
 import { Button } from "@/ui/design-system/button/button"
 import { toast } from "react-toastify"
-import { firebaseLogOutUser } from "@/api/authentification"
+import { firebaseLogOutUser } from "@/api/authentication"
 import { Typography } from "@/ui/design-system/typography/typography"
 import { ActiveLink } from "./active-link"
 

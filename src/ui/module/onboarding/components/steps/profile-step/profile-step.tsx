@@ -11,7 +11,7 @@ import { firestoreUpdateDocument } from "@/api/firestore"
 import { useAuth } from "@/context/AuthUserContext"
 import { toast } from "react-toastify"
 import { useEffect } from "react"
-import { updateUserIdentificationData } from "@/api/authentification"
+import { updateUserIdentificationData } from "@/api/authentication"
 
 export const ProfileStep = ({
     prev,

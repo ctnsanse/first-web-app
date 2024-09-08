@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterView } from "./register.view";
 import { RegisterFormFielsType } from "@/types/form";
-import { firebaseCreatUser, sendEmailVerificationProcedure } from "@/api/authentification";
+import { firebaseCreatUser, sendEmailVerificationProcedure } from "@/api/authentication";
 import { toast } from "react-toastify";
 import { useToggle } from "@/hooks/use-toggle";
 import { Button } from "@/ui/design-system/button/button";
@@ -29,7 +29,7 @@ export const RegisterContainer = () => {
     }
 
     // Inscription d'un utillisateur avec l'email, le password, et how_did_hear..
-    const handleCreateUserAuthentification = async ({
+    const handleCreateUserAuthentication = async ({
         email,
         password,
         how_did_hear
@@ -78,7 +78,7 @@ export const RegisterContainer = () => {
             return
         }
 
-        handleCreateUserAuthentification(formData)
+        handleCreateUserAuthentication(formData)
     }
 
     return (

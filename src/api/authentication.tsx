@@ -1,8 +1,13 @@
+import { 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword,
+    signOut, 
+    sendPasswordResetEmail, 
+    sendEmailVerification,
+} from "firebase/auth"
 import { auth } from "@/config/firebase-config"
-import { error } from "console"
+import { getFirebasErrorMessage } from "@/utils/getFirebaseErrorMessage"
 import { FirebaseError } from "firebase/app"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification } from "firebase/auth"
-import { signOut } from "firebase/auth"
 
 
 // Inscription d'un utilisateur
@@ -14,10 +19,14 @@ export const firebaseCreatUser = async (email: string, password: string) => {
 
         const firebaseError = error as FirebaseError
 
-        // ... @todo format error
+        const errorMessage = getFirebasErrorMessage(
+            "createUserWithEmailAndPassword", 
+            firebaseError.code
+        )
+
         return { error: {
             code: firebaseError.code,
-            message: firebaseError.message,
+            message: errorMessage,
         }, }
     }
 }
@@ -27,15 +36,20 @@ export const firebaseSignInUser = async (email: string, password: string) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password)
         return { data: userCredential.user}
-    } catch(error) {
+    } catch (error) {
 
         const firebaseError = error as FirebaseError
 
-        // ... @todo format error
-        return { error: {
-            code: firebaseError.code,
-            message: firebaseError.message,
-        }, }
+        const errorMessage = getFirebasErrorMessage(
+            "signInWithEmailAndPassword", 
+            firebaseError.code
+        )
+        return { 
+            error: {
+                code: firebaseError.code,
+                message: errorMessage,
+        }, 
+    }
     }
 }
 
@@ -50,10 +64,14 @@ export const firebaseLogOutUser = async () => {
 
         const firebaseError = error as FirebaseError
 
-        // ... @todo format error
+        const errorMessage = getFirebasErrorMessage(
+            "signOut", 
+            firebaseError.code
+        )
+
         return { error: {
             code: firebaseError.code,
-            message: firebaseError.message,
+            message: errorMessage,
         }, }
     }
 }
@@ -72,10 +90,14 @@ export const sendEmailToResetPassword = async (email: string) => {
 
         const firebaseError = error as FirebaseError
 
-        // ... @todo format error
+        const errorMessage = getFirebasErrorMessage(
+            "sendPasswordResetEmail", 
+            firebaseError.code
+        )
+
         return { error: {
             code: firebaseError.code,
-            message: firebaseError.message,
+            message: errorMessage,
         }, }
     }
 }
@@ -93,10 +115,14 @@ export const sendEmailVerificationProcedure = async () => {
 
         const firebaseError = error as FirebaseError
 
-        // ... @todo format error
+        const errorMessage = getFirebasErrorMessage(
+            "sendEmailVerification", 
+            firebaseError.code
+        )
+
         return { error: {
             code: firebaseError.code,
-            message: firebaseError.message,
+            message: errorMessage,
         }, }
 
         }   
@@ -125,11 +151,16 @@ export const updateUserIdentificationData = async (uid: string, data: any) => {
     if (!result.ok) {
         const errorResponse = await result.json()
         const firebaseError = errorResponse as FirebaseError
-        // ... @todo format error
+
+        const errorMessage = getFirebasErrorMessage(
+            "fetch", 
+            firebaseError.code
+        )
+
         return ({
             error: {
                 code: firebaseError.code,
-                message: firebaseError.message,
+                message: errorMessage,
             }
         })
     }

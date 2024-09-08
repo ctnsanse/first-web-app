@@ -5,7 +5,7 @@ import { LoginFormFielsType } from "@/types/form";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/config/firebase-config";
 import { useToggle } from "@/hooks/use-toggle";
-import { firebaseSignInUser } from "@/api/authentification";
+import { firebaseSignInUser } from "@/api/authentication";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
