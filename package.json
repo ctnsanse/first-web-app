@@ -13,6 +13,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "export": "^0.1.337",
+    "fetch": "^1.1.0",
     "firebase": "^10.13.1",
     "git": "^0.1.5",
     "next": "^14.2.4",

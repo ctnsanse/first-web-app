@@ -1,4 +1,5 @@
 import { auth } from "@/config/firebase-config"
+import { error } from "console"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification } from "firebase/auth"
 import { signOut } from "firebase/auth"
@@ -107,4 +108,30 @@ export const sendEmailVerificationProcedure = async () => {
             }
         }
     }
+}
+
+export const updateUserIdentificationData = async (uid: string, data: any) => {
+    const result = await fetch('https://us-central1-fafofri-44e0c.cloudfunctions.net/updateUser', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            uid: uid,
+            data: data,
+        })
+    })
+
+    if (!result.ok) {
+        const errorResponse = await result.json()
+        const firebaseError = errorResponse as FirebaseError
+        // ... @todo format error
+        return ({
+            error: {
+                code: firebaseError.code,
+                message: firebaseError.message,
+            }
+        })
+    }
+    return {data: true}
 }
