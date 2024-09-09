@@ -2,14 +2,14 @@ import Image from "next/image";
 import clsx from "clsx";
 
 interface Props {
-    size?: "small" | "medium" | "large"
+    size?: "small" | "medium" | "large" | "extra-large"
     src: string;
     alt: string;
 }
 
 export const Avatar = ({ size = "medium", src, alt }: Props) => {
 
-    let sizeStyles: string;
+    let sizeStyles: string = "";
 
     switch (size) {
 
@@ -23,6 +23,10 @@ export const Avatar = ({ size = "medium", src, alt }: Props) => {
 
         case "large":
             sizeStyles = "w-[50px] h-[50px]";
+            break;
+
+        case "extra-large":
+            sizeStyles = "w-[130px] h-[130px]";
             break;
     }
 

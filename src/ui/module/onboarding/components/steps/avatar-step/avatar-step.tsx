@@ -7,6 +7,7 @@ import { Typography } from "@/ui/design-system/typography/typography";
 import { ProfileStepForm } from "../profile-step/profile-step-form";
 import { OnboardingFooter } from "../../footer/onboarding-footer";
 import { UploadAvatar } from "@/ui/components/upload-avatar/upload-avatar";
+import { useState } from "react";
 
 export const AvatarStep = ({
     prev,
@@ -19,6 +20,28 @@ export const AvatarStep = ({
     const { authUser } = useAuth();
 
     const { value: isLoading, setValue: setLoading } = useToggle()
+
+    const [selectedImage, setSelectedImage] = useState<File | null>()
+
+    const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+
+    const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+
+        if (file) {
+        setSelectedImage(file)
+
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                let imageDataUrl: string | ArrayBuffer | null = null
+                if (e.target) {
+                    imageDataUrl = e.target.result
+                }
+                setImagePreview(imageDataUrl)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
 
     return (
         <div className="relative h-screen pb-[91px]">
@@ -40,7 +63,10 @@ export const AvatarStep = ({
                         </div>
                         <div className="flex items-center h-full col-span-6 px-36">
                             <div className="flex justify-center w-full">
-                                <UploadAvatar />
+                                <UploadAvatar 
+                                    handleImageSelect={handleImageSelect}
+                                    imagePreview={imagePreview}
+                                />
                             </div>
                         </div>
                     </Container>
