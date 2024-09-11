@@ -10,13 +10,11 @@ export const HeroTopView = () => {
             <div className="w-full max-w-2xl space-y-5">
                 
                 <Typography variant="h1" component="h1" className="max-w-lg">
-                    Anilton & Kle les indestructibles
+                    VêtAffaires
                     </Typography>
 
                     <Typography variant="body-lg" theme="gray" component="p" className="max-w-xl">
-                    Ici, on se prend pas la tête, mais on code comme des bêtes !
-                    Rejoins notre tribu de robots codeurs, partage tes projets
-                    les plus fous et fais-toi de nouveaux amis développeurs.
+                    Tu gagne pas un smic, tu crois mon daron c'est un steak.
                     </Typography>
 
                     <div className="space-x-5 pt-2.5">

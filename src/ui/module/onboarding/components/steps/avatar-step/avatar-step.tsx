@@ -24,7 +24,7 @@ export const AvatarStep = ({
 
     const { authUser } = useAuth();
 
-    const { value: isLoading, toggle  } = useToggle({initial: true})
+    const { value: isLoading, toggle  } = useToggle()
 
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
 

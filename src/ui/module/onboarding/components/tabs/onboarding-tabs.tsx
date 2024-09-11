@@ -12,7 +12,8 @@ export const OnboardingTabs = ({tabs, getCurrentStep}: Props) => {
     <div className="relative inline-block">
         <div className="flex items-center space-x-6">
             {tabs && tabs.map(
-                (tab) => (
+                (tab) => 
+                    tab.id !== tabs.length && (
                     <div key={tab.id}
                     className={clsx(
                         getCurrentStep && getCurrentStep()?.id === tab.id ? "border-primary" : "border-gray-400",
