@@ -4,9 +4,10 @@ import clsx from "clsx";
 interface Props {
     size? : "small" | "medium" | "large";
     variant? : "primary" | "white";
+    className?: string;
 }
 
-export const Spinner = ({ size = "medium", variant = "primary" } : Props) => {
+export const Spinner = ({ size = "medium", variant = "primary", className } : Props) => {
     let variantStyles : string = "", sizeStyles : string = "";
 
     switch (size) {
@@ -48,6 +49,8 @@ export const Spinner = ({ size = "medium", variant = "primary" } : Props) => {
         className = {clsx (
             sizeStyles,
             variantStyles,
+            "animate-spin",
+            className
         )}
         xmlns="http://www.w3.org/2000/svg" 
         width="1em" 

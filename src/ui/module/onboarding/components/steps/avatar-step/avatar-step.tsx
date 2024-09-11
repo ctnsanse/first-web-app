@@ -8,6 +8,11 @@ import { ProfileStepForm } from "../profile-step/profile-step-form";
 import { OnboardingFooter } from "../../footer/onboarding-footer";
 import { UploadAvatar } from "@/ui/components/upload-avatar/upload-avatar";
 import { useState } from "react";
+import { getDownloadURL, ref, StorageReference, uploadBytesResumable, UploadTask } from "firebase/storage";
+import { storage } from "@/config/firebase-config";
+import { toast } from "react-toastify";
+import { updateUserIdentificationData } from "@/api/authentication";
+import { firestoreUpdateDocument } from "@/api/firestore";
 
 export const AvatarStep = ({
     prev,
@@ -19,11 +24,14 @@ export const AvatarStep = ({
 
     const { authUser } = useAuth();
 
-    const { value: isLoading, setValue: setLoading } = useToggle()
+    const { value: isLoading, toggle  } = useToggle({initial: true})
 
-    const [selectedImage, setSelectedImage] = useState<File | null>()
+    const [selectedImage, setSelectedImage] = useState<File | null>(null)
 
     const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(null)
+
+    const [uploadProgress, setUploadProgress] = useState<number>(0)
+    // console.log("uploadProgress :: ", uploadProgress)
 
     const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -40,6 +48,67 @@ export const AvatarStep = ({
                 setImagePreview(imageDataUrl)
             }
             reader.readAsDataURL(file)
+        }
+    }
+
+    const updateUserDocument = async (photoURL: string) => {
+        const body = {
+            photoURL: photoURL
+        }
+
+        await updateUserIdentificationData(authUser.uid, body);
+
+        const  {error} = await firestoreUpdateDocument(
+            "users",
+            authUser.uid,
+            body
+        )
+
+        if (error) {
+            toggle()
+            toast.error(error.message);
+            return
+        }
+
+        toggle();
+        next();
+    }
+
+    const handleImageUpload = () => {
+        let storageRef : StorageReference;
+        let uploadTask: UploadTask;
+
+        if (selectedImage !== null) {
+            toggle()
+            storageRef = ref(
+                storage,
+                `users-media/${authUser.uid}/avatar/avatar-${authUser.uid}`
+            )
+            uploadTask = uploadBytesResumable(storageRef, selectedImage)
+
+            uploadTask.on(
+                "state_changed", (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setUploadProgress(progress)
+                },
+
+                (error) => {
+                    console.log("error", error)
+                    toggle();
+                    toast.error("Une erreur inconnue est survenue");
+                },
+
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then(
+                    (downloadURL) => {
+                        updateUserDocument(downloadURL)
+                        // console.log(":: downloadURL ::", downloadURL)
+                    }
+                    )
+                }
+            )
+        } else {
+            next()
         }
     }
 
@@ -66,6 +135,8 @@ export const AvatarStep = ({
                                 <UploadAvatar 
                                     handleImageSelect={handleImageSelect}
                                     imagePreview={imagePreview}
+                                    uploadProgress={uploadProgress}
+                                    isLoading={isLoading}
                                 />
                             </div>
                         </div>
@@ -73,7 +144,7 @@ export const AvatarStep = ({
                 </div>
                 <OnboardingFooter 
                     prev={prev}
-                    next={next}
+                    next={handleImageUpload}
                     isFinalStep={isFinalStep}
                     isLoading={isLoading}
                 />
