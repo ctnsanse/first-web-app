@@ -15,7 +15,7 @@ export interface UserDocument {
     email: string
     how_did_hear: string
     creation_date: Timestamp
-    onBoardingIsCompleted: boolean
+    onboardingIsCompleted: boolean
     displayName: string
     expertise: string
     biography: string

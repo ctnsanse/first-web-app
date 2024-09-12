@@ -36,7 +36,7 @@ export const firestoreUpdateDocument = async (
     try {
 
         const documentRef = doc(db, collectionName, documentID)
-
+        
         await updateDoc(documentRef, data)
         return { data: true}
     } catch(error) {

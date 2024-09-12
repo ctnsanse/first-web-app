@@ -7,11 +7,30 @@ import { Typography } from "@/ui/design-system/typography/typography";
 import { OnboardingTabs } from "../../tabs/onboarding-tabs";
 import { Container } from "@/ui/components/container/container";
 import { Logo } from "@/ui/design-system/logo/logo";
+import { firestoreUpdateDocument } from "@/api/firestore";
+import { toast } from "react-toastify";
 
 export const FinalStep = ({isFinalStep}: BaseComponentProps) => {
     const  { authUser } = useAuth();
     const { value: isLoading, toggle } = useToggle()
 
+    const handleCloseOnboarding = async () => {
+        toggle()
+        const data = {
+            onboardingIsCompleted: true,
+        }
+        const {error} = await firestoreUpdateDocument(
+            "users",
+            authUser.uid,
+            data
+        )
+        if (error) {
+            toggle()
+            toast.error(error.message)
+            return
+        }
+        toggle()
+    }
 
     return (
         <div className="relative h-screen pb-[91px]">
@@ -37,7 +56,7 @@ export const FinalStep = ({isFinalStep}: BaseComponentProps) => {
         </div>
         <OnboardingFooter
             isFinalStep={isFinalStep}
-            // next={handleSubmit(onSubmit)}
+            next={handleCloseOnboarding}
             isLoading={isLoading}
         />
     </div>

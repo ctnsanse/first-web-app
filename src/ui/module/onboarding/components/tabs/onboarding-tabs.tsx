@@ -19,7 +19,7 @@ export const OnboardingTabs = ({tabs, getCurrentStep}: Props) => {
                         getCurrentStep && getCurrentStep()?.id === tab.id ? "border-primary" : "border-gray-400",
                         "relative z-10 py-2.5 border-b-[2px]"
                         )}>
-                        <Typography 
+                        <Typography
                         variant="caption3" 
                         weight="medium" 
                         theme={getCurrentStep && getCurrentStep()?.id === tab.id ? "primary" : "gray-600"}

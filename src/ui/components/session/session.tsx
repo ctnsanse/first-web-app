@@ -14,7 +14,7 @@ export const Session = ({children, sessionStatus}: Props) => {
     const router = useRouter()
     const {authUserIsLoading, authUser} = useAuth()
 
-    const onboardingIsCompleted = authUser?.userDocument?.onBoardingIsCompleted
+    const onboardingIsCompleted = authUser?.userDocument?.onboardingIsCompleted
 
     const shouldRedirectToOnboarding = () => {
         return (
