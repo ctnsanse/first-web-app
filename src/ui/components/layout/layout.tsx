@@ -5,6 +5,7 @@ import { Navigation } from "../navigation/navigation"
 import { UserAccountNavigation } from "../navigation/user-account-navigation"
 import { Session } from "../session/session"
 import { sessionStatusType } from "@/types/session-status-type"
+import { CallsToActionBarContribution } from "../calls-to-action/calls-to-action-side-bar-contribution"
 
 interface Props {
     children?: React.ReactNode
@@ -21,8 +22,9 @@ export const Layout = ({ children, isDisplayBreadcrumbs = true, withSidebar, ses
         view = (
             <Container className="mb-14">
                 <div className="grid grid-cols-12 gap-7">
-                    <div className="col-span-3">
+                    <div className="col-span-3 space-y-8">
                         <UserAccountNavigation />
+                        <CallsToActionBarContribution />
                     </div>
                     <div className="col-span-9">{children}</div>
                 </div>

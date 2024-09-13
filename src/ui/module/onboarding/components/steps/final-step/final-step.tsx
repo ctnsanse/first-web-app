@@ -11,7 +11,7 @@ import { firestoreUpdateDocument } from "@/api/firestore";
 import { toast } from "react-toastify";
 
 export const FinalStep = ({isFinalStep}: BaseComponentProps) => {
-    const  { authUser } = useAuth();
+    const  { authUser, reloadAuthUserData } = useAuth();
     const { value: isLoading, toggle } = useToggle()
 
     const handleCloseOnboarding = async () => {
@@ -29,7 +29,8 @@ export const FinalStep = ({isFinalStep}: BaseComponentProps) => {
             toast.error(error.message)
             return
         }
-        toggle()
+        reloadAuthUserData();
+        toggle();
     }
 
     return (

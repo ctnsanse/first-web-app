@@ -22,7 +22,7 @@ export const ProfileStep = ({
     getCurrentStep,
 }: BaseComponentProps) => {
 
-    const { authUser } = useAuth();
+    const { authUser, reloadAuthUserData } = useAuth();
 
     const { value: isLoading, setValue: setLoading } = useToggle()
 
@@ -100,10 +100,9 @@ export const ProfileStep = ({
                 toast.error(error.message)
                 return
             }
+            reloadAuthUserData()
 
             }
-
-            handleUpdateUserDocument(formData)
         }
         setLoading(false)
         next()
