@@ -25,6 +25,7 @@ export const Layout = ({ children, isDisplayBreadcrumbs = true, withSidebar, ses
                     <div className="col-span-3 space-y-8">
                         <UserAccountNavigation />
                         <CallsToActionBarContribution />
+                        <CallsToActionBarContribution />
                     </div>
                     <div className="col-span-9">{children}</div>
                 </div>

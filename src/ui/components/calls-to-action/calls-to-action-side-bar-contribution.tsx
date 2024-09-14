@@ -27,7 +27,7 @@ export const CallsToActionBarContribution = () => {
                 height={183}
                 src="/assets/svg/money-card.svg"
                 alt="Donnation"
-                className="absolute -bottom-10 transform -translate-x-1/2 left-1/2"
+                className="absolute -bottom-7 transform -translate-x-1/2 left-1/2"
             />
         </div>
     )
