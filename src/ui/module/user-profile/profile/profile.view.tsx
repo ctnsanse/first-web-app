@@ -4,16 +4,24 @@ import { FormsType } from "@/types/form"
 
 
 interface Props {
+    imagePreview: string | ArrayBuffer | null;
+    uploadProgress: number;
+    handleImageSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
     form: FormsType
 }
 
-export const ProfileView = ({form}: Props) => {
+export const ProfileView = ({ form, imagePreview, uploadProgress, handleImageSelect }: Props) => {
     return (
         <div className="space-y-5">
-        <Typography variant="h1" component="h1">
-            Mon compte
-        </Typography>
-        <ProfileForm form={form}/>
+            <Typography variant="h1" component="h1">
+                Mon compte
+            </Typography>
+            <ProfileForm
+                imagePreview={imagePreview}
+                uploadProgress={uploadProgress}
+                handleImageSelect={handleImageSelect}
+                form={form} 
+            />
         </div>
     )
 }

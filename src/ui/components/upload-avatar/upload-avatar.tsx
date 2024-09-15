@@ -8,12 +8,14 @@ interface Props {
     imagePreview: string | ArrayBuffer | null
     uploadProgress: number
     isLoading: boolean
+    variant?: "primary" | "outline";
 }
 export const UploadAvatar = ({
     handleImageSelect,
     imagePreview,
     uploadProgress,
     isLoading,
+    variant = "primary",
 }: Props) => {
 
     const {authUser} = useAuth()
@@ -34,7 +36,9 @@ export const UploadAvatar = ({
 
         <label className={clsx(
             isLoading ? "cursor-not-allowed" : "cursor-pointer",
-            "inline-block bg-primary hover:bg-primary-400 text-white rounded px-[18px] py-[10px] text-caption2 font-medium animate text-center"
+            variant === "primary" && "bg-primary hover:bg-primary-400 text-white",
+            variant === "outline" && "bg-white hover:bg-gray-400/50 border border-gray-500 text-gray-800",
+            "inline-block rounded px-[18px] py-[10px] text-caption2 font-medium animate text-center"
             )}>
             <div className="flex items-center gap-2">
                 <RiCamera2Fill />

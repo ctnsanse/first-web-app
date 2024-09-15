@@ -126,7 +126,7 @@ export const AvatarStep = ({
                                     Dernière étape !
                                 </Typography>
                                 <Typography variant="body-base" component="p" theme="gray">
-                                    Ajoute une photo ou un avatar afin que l'on puisse avoir une tête avec cette personnalité.
+                                    Ajoute une photo ou un avatar afin que lon puisse avoir une tête avec cette personnalité.
                                 </Typography>
                             </div>
                         </div>

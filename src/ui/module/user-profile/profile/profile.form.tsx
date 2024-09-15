@@ -1,14 +1,18 @@
 import { FormsType } from "@/types/form"
+import { UploadAvatar } from "@/ui/components/upload-avatar/upload-avatar";
 import { Button } from "@/ui/design-system/button/button";
 import { Input } from "@/ui/design-system/forms/input";
 import { Textarea } from "@/ui/design-system/forms/textarea";
 import { Typography } from "@/ui/design-system/typography/typography";
 
 interface Props {
+    imagePreview: string | ArrayBuffer | null;
+    uploadProgress: number;
+    handleImageSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
     form: FormsType
 }
 
-export const ProfileForm = ({form}: Props) => {
+export const ProfileForm = ({form, imagePreview, uploadProgress, handleImageSelect}: Props) => {
 
     const { register, errors, isLoading, onSubmit, handleSubmit } = form;
 
@@ -16,7 +20,13 @@ export const ProfileForm = ({form}: Props) => {
         <form onSubmit={handleSubmit(onsubmit)} className="w-full space-y-4">
 
             <div className="flex items-center justify-between py-5">
-                <div>{/* <UploadAvatar /> */}</div>
+                <div><UploadAvatar
+                    handleImageSelect={handleImageSelect}
+                    imagePreview={imagePreview}
+                    uploadProgress={uploadProgress}
+                    isLoading={isLoading}
+                    variant="outline"
+                /></div>
                 <div className="flex items-end gap-1">
                     <Typography
                         variant="h1"
